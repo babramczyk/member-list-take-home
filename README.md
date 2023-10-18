@@ -5,6 +5,7 @@
 - All `TODO`s remaining in source 😄
 - Use a `<table>` for better HTML semantics, and possibly some a11y benefits
   - Opted to not use one, since I know they can be tricky WRT styling, flexbox, etc. In a production app where we had the time, we could maybe invest the time to make a `<table>` work, but I didn't want to eff with that for now
+- Add a loading state in case members take longer to load (i.e. React suspense / showing a spinner after e.g 500ms, or adding a loading skeleton)
 
 # To-do
 
