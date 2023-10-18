@@ -1,8 +1,18 @@
 import { Member } from "../data/members";
 
-export function MemberRow({ member }: { member: Member }) {
+export function MemberRow({
+  member,
+  onToggleAdmin,
+}: {
+  member: Member;
+  onToggleAdmin?: () => void;
+}) {
   return (
-    <div className="border-2 border-slate-500 p-4 flex flex-col">
+    // TODO: Turn this into a button if we're using onClick -- or, most likely, use a checkbox or some other specific part of the row to toggle admin
+    <div
+      className="border-2 border-slate-500 p-4 flex flex-col"
+      onClick={onToggleAdmin}
+    >
       <div className="flex flex-row">
         <img
           src={member.photo}
