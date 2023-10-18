@@ -18,11 +18,17 @@ export interface Member {
   last: string;
   role: string;
   photo: string;
+  admin?: boolean;
 }
 
 // TODO: Review on if this makes sense as a generic util?
 function getMembersAsArray() {
-  return Object.keys(_MEMBERS).map((id) => ({ id, ..._MEMBERS[id] }));
+  return Object.keys(_MEMBERS).map((id) => ({
+    id,
+    // FIXME: This is a bit weird going in this function since this is a util, but gets me there for now. I didn't want to modify the data I was given, in case that was a no-no.
+    admin: false,
+    ..._MEMBERS[id],
+  }));
 }
 
 const _MEMBERS: Record<string, Member> = {
