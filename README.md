@@ -10,6 +10,7 @@
 
 # To-do
 
+- Actually deploy this somewhere
 - Styling
   - Review colors
 - Don't assume we have every field always on a member (i.e. we might not have an avatar, even though the current data gives us that always)
