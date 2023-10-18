@@ -44,6 +44,7 @@ export default function App() {
         </>
       );
 
+    // TODO: Look into a more graceful solution here. This way is good perf-wise and allows the rendered element to be re-used and it to retain focus, but it's still not super intuitive or leave an easy way to scale in the future when we might want more headers
     let hasRenderedStandardHeader = false;
 
     return (
