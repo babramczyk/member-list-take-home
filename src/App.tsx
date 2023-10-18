@@ -30,12 +30,19 @@ export default function App() {
     });
   }, []);
 
+  // TODO: This is weird... Maybe just make a util component for a Tab?
+  const tabClassName = "border border-slate-900 rounded-t-lg p-4";
+
   return (
     <div className="h-full p-16">
       <Tabs.Root defaultValue="members">
-        <Tabs.List>
-          <Tabs.Trigger value="members">Members</Tabs.Trigger>
-          <Tabs.Trigger value="groups">Groups</Tabs.Trigger>
+        <Tabs.List className="px-4 flex gap-2">
+          <Tabs.Trigger value="members" className={tabClassName}>
+            Members
+          </Tabs.Trigger>
+          <Tabs.Trigger value="groups" className={tabClassName}>
+            Groups
+          </Tabs.Trigger>
         </Tabs.List>
         <div className="border-2 border-slate-900 h-full flex flex-col">
           <Tabs.Content value="members">
