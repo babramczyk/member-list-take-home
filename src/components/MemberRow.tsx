@@ -16,9 +16,9 @@ export function MemberRow({
   return (
     // TODO: In the future, we might want to let consumers specify the tag to user here. i.e. there's theoretically use cases where we're not rendering this row in a list 🤷🏼‍♂️ and in that case, we might just want a <div>
     <li
-      className={`border-b-2 border-slate-100 p-4 flex flex-col 
-                  transition-all ease-in-out duration-300 
-                  ${applyAdminStyles && member.admin ? "ml-12" : ""}`}
+      className={`border-b-2 border-x-2 border-slate-100 p-4 flex flex-col transition-all ease-in-out duration-300 ${
+        applyAdminStyles && member.admin ? "ml-12" : ""
+      }`}
     >
       <div className="flex flex-row items-center gap-8">
         {/* TODO: Reconsider where this goes, what the UI looks for it, etc. Current state is very barebones and kind of gross */}

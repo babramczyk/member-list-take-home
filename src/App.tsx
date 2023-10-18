@@ -4,6 +4,7 @@ import "./App.css";
 import { MemberRow, getMemberRowSkeletonList } from "./components/MemberRow";
 import * as Tabs from "@radix-ui/react-tabs";
 import { RowDivider } from "./components/RowDivider";
+import { EmptyListMessage } from "./components/EmptyListMessage";
 
 export default function App() {
   const [members, setMembers] = useState<Member[] | null>(null);
@@ -45,9 +46,15 @@ export default function App() {
     // TODO: Look into a more graceful solution here. This way is good perf-wise and allows the rendered element to be re-used and it to retain focus, but it's still not super intuitive or leave an easy way to scale in the future when we might want more headers
     let hasRenderedStandardHeader = false;
 
+    // TODO: Fix this, this ugly, and sucks for perf. We should probably just segment the full list, and have a component that renders a divider / header, and then rows if there are some or the empty message if not
+    const hasAdmin = members.some((member) => member.admin);
+    const hasStandard = members.some((member) => !member.admin);
+
     return (
       <ol>
         <RowDivider>Admin</RowDivider>
+        {!hasAdmin && <EmptyListMessage>No admins found</EmptyListMessage>}
+
         {[...members]
           .sort((a, b) => (a.admin ? -1 : 1))
           .map((member) => {
@@ -59,7 +66,9 @@ export default function App() {
 
             return (
               <Fragment key={member.id}>
-                {willRenderStandardHeader && <RowDivider>Standard</RowDivider>}
+                {willRenderStandardHeader && (
+                  <RowDivider className="mt-10">Standard</RowDivider>
+                )}
                 <MemberRow
                   member={member}
                   onToggleAdmin={() => onToggleAdmin(member.id)}
@@ -67,13 +76,21 @@ export default function App() {
               </Fragment>
             );
           })}
+
+        {!hasRenderedStandardHeader && (
+          <RowDivider className="mt-10">Standard</RowDivider>
+        )}
+        {!hasStandard && (
+          <EmptyListMessage>No standard users found</EmptyListMessage>
+        )}
       </ol>
     );
   }, [members, onToggleAdmin]);
 
   // TODO: This is weird... Maybe just make a util component for a Tab?
   /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
-  const tabClassName = "border-b-2 border-slate-300 text-slate-500 rounded-t-lg py-4 px-10 w-60 text-xl font-bold Tab";
+  const tabClassName =
+    "border-b-2 border-slate-300 text-slate-500 rounded-t-lg py-4 px-10 w-60 text-xl font-bold Tab";
 
   return (
     <Tabs.Root
@@ -88,7 +105,7 @@ export default function App() {
           Groups
         </Tabs.Trigger>
       </Tabs.List>
-      <div className="flex flex-col overflow-auto rounded border-2 border-slate-100">
+      <div className="flex flex-col overflow-auto rounded">
         <Tabs.Content value="members">
           <ol>
             {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}

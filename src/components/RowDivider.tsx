@@ -4,9 +4,17 @@ import { ReactNode } from "react";
 /**
  * A header / divider to separate rows in our member table into separate, meaningful sections
  */
-export function RowDivider({ children }: { children: ReactNode }) {
+export function RowDivider({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="bg-slate-500 text-white text-2xl text-center p-4 border-b-2 font-bold">
+    <div
+      className={`text-xl p-4 border-b-2 border-slate-100 font-bold ${className}`}
+    >
       {children}
     </div>
   );
