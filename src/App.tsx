@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, ReactNode, useCallback, useEffect, useState } from "react";
 import { Member, fetchMembers } from "./data/members";
 import "./App.css";
 import { MemberRow } from "./components/MemberRow";
@@ -39,9 +39,15 @@ export default function App() {
 
     let hasRenderedStandardHeader = false;
 
+    const Header = ({ children }: { children: ReactNode }) => (
+      <div className="bg-slate-500 text-white text-2xl text-center p-4 border-b-2 font-bold">
+        {children}
+      </div>
+    );
+
     return (
       <>
-        <div>Admin</div>
+        <Header>Admin</Header>
         {[...members]
           .sort((a, b) => (a.admin ? -1 : 1))
           .map((member) => {
@@ -53,7 +59,7 @@ export default function App() {
 
             return (
               <Fragment key={member.id}>
-                {willRenderStandardHeader && <div>Standard</div>}
+                {willRenderStandardHeader && <Header>Standard</Header>}
                 <MemberRow
                   member={member}
                   onToggleAdmin={() => onToggleAdmin(member.id)}
@@ -76,8 +82,8 @@ export default function App() {
             Groups
           </Tabs.Trigger>
         </Tabs.List>
-        <div className="border-2 border-slate-900 h-full flex flex-col">
-          <Tabs.Content value="members">
+        <div className="border-2 border-slate-900 h-full flex flex-col items-stretch">
+          <Tabs.Content value="members" className="flex flex-col items-stretch">
             {/* TODO: Figure out a fancy way to not recreate elements for each row? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
             {members?.map((member) => (
               <MemberRow
@@ -88,7 +94,9 @@ export default function App() {
             ))}
           </Tabs.Content>
           {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
-          <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
+          <Tabs.Content value="groups" className="flex flex-col items-stretch">
+            {renderGroupTab()}
+          </Tabs.Content>
         </div>
       </Tabs.Root>
     </div>
