@@ -50,3 +50,26 @@ export function MemberRow({
     </div>
   );
 }
+
+/**
+ * A skeleton row / loader to show while a member is loading
+ */
+export function MemberRowSkeleton() {
+  return (
+    <div className="border-2 border-slate-500 p-4 flex flex-col animate-pulse">
+      <div className="flex flex-row items-center gap-8">
+        <div className="w-8 h-8 rounded-full mr-4 bg-gray-300" />
+        <div className="flex flex-col">
+          <div className="font-bold text-xl bg-gray-300 h-8 w-48" />
+          <div className="text-gray-500 bg-gray-300 h-4 w-32" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function getMemberRowSkeletonList(size: number) {
+  return Array(size)
+    .fill(null)
+    .map((_, i) => <MemberRowSkeleton key={i} />);
+}

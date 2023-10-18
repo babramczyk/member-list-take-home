@@ -1,8 +1,9 @@
-import { Fragment, ReactNode, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { Member, fetchMembers } from "./data/members";
 import "./App.css";
-import { MemberRow } from "./components/MemberRow";
+import { MemberRow, getMemberRowSkeletonList } from "./components/MemberRow";
 import * as Tabs from "@radix-ui/react-tabs";
+import { RowDivider } from "./components/RowDivider";
 
 export default function App() {
   const [members, setMembers] = useState<Member[] | null>(null);
@@ -34,20 +35,24 @@ export default function App() {
   /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
   const tabClassName = "border border-slate-900 rounded-t-lg p-4 Tab";
 
+  // TODO: Make lists more semantic (i.e. ul / li)
+
   const renderGroupTab = useCallback(() => {
-    if (!members) return null;
+    if (!members)
+      return (
+        <>
+          <RowDivider>Admin</RowDivider>
+          {getMemberRowSkeletonList(2)}
+          <RowDivider>Standard</RowDivider>
+          {getMemberRowSkeletonList(6)}
+        </>
+      );
 
     let hasRenderedStandardHeader = false;
 
-    const Header = ({ children }: { children: ReactNode }) => (
-      <div className="bg-slate-500 text-white text-2xl text-center p-4 border-b-2 font-bold">
-        {children}
-      </div>
-    );
-
     return (
       <>
-        <Header>Admin</Header>
+        <RowDivider>Admin</RowDivider>
         {[...members]
           .sort((a, b) => (a.admin ? -1 : 1))
           .map((member) => {
@@ -59,7 +64,7 @@ export default function App() {
 
             return (
               <Fragment key={member.id}>
-                {willRenderStandardHeader && <Header>Standard</Header>}
+                {willRenderStandardHeader && <RowDivider>Standard</RowDivider>}
                 <MemberRow
                   member={member}
                   onToggleAdmin={() => onToggleAdmin(member.id)}
@@ -87,14 +92,16 @@ export default function App() {
       <div className="border-2 border-slate-900 flex flex-col overflow-auto rounded">
         <Tabs.Content value="members">
           {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
-          {members?.map((member) => (
-            <MemberRow
-              key={member.id}
-              member={member}
-              onToggleAdmin={() => onToggleAdmin(member.id)}
-              applyAdminStyles
-            />
-          ))}
+          {members
+            ? members.map((member) => (
+                <MemberRow
+                  key={member.id}
+                  member={member}
+                  onToggleAdmin={() => onToggleAdmin(member.id)}
+                  applyAdminStyles
+                />
+              ))
+            : getMemberRowSkeletonList(8)}
         </Tabs.Content>
         {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
         <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
