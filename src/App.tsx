@@ -107,7 +107,7 @@ export default function App() {
       </Tabs.List>
       <div className="flex flex-col overflow-auto rounded">
         <Tabs.Content value="members">
-          <ol>
+          <ol className="border-t-2 border-slate-100">
             {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
             {members
               ? members.map((member) => (

@@ -42,10 +42,10 @@ export function MemberRow({
           className="w-16 h-16 rounded-full mr-4"
         />
         <div className="flex flex-col">
-          <div className="font-bold text-xl">
+          <div className="font-semibold text-slate-800 text-lg">
             {member.first + " " + member.last}
           </div>
-          <div className="text-gray-500">{member.role}</div>
+          <div className="text-slate-500">{member.role}</div>
         </div>
       </div>
     </li>
@@ -56,7 +56,7 @@ export function MemberRow({
  * A skeleton row / loader to show while a member is loading
  */
 export function MemberRowSkeleton({
-  avatarColor = "bg-gray-400",
+  avatarColor = "bg-slate-400",
 }: {
   /** Background color to make the loader for the user's avatar, as a Tailwind string (e.g. `bg-red-950`) */
   avatarColor?: string;
@@ -67,8 +67,8 @@ export function MemberRowSkeleton({
       <div className="flex flex-row items-center gap-8 pl-20">
         <div className={`w-16 h-16 rounded-full mr-4 ${avatarColor}`} />
         <div className="flex flex-col">
-          <div className="font-bold text-xl bg-gray-500 h-8 w-48 mb-2" />
-          <div className="bg-gray-300 h-4 w-32" />
+          <div className="font-bold text-xl bg-slate-500 h-8 w-48 mb-2" />
+          <div className="bg-slate-300 h-4 w-32" />
         </div>
       </div>
     </div>
