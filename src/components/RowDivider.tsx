@@ -13,7 +13,7 @@ export function RowDivider({
 }) {
   return (
     <div
-      className={`text-xl p-4 border-b-2 border-slate-100 font-bold ${className}`}
+      className={`text-xl p-4 border-b-2 border-slate-200 font-bold ${className}`}
     >
       {children}
     </div>

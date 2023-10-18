@@ -6,6 +6,7 @@ import * as RadixTabs from "@radix-ui/react-tabs";
 import { RowDivider } from "./components/RowDivider";
 import { EmptyListMessage } from "./components/EmptyListMessage";
 import { Tabs } from "./components/Tabs";
+import { HeaderRow } from "./components/HeaderRow";
 
 export default function App() {
   const [members, setMembers] = useState<Member[] | null>(null);
@@ -52,7 +53,9 @@ export default function App() {
 
     return (
       <ol>
+        {/* TODO: Make a component for a "table", that includes a divider / label, a header row, and then renders all the children */}
         <RowDivider>Admin</RowDivider>
+        <HeaderRow />
         {!hasAdmin && <EmptyListMessage>No admins found</EmptyListMessage>}
 
         {[...members]
@@ -67,7 +70,10 @@ export default function App() {
             return (
               <Fragment key={member.id}>
                 {willRenderStandardHeader && (
-                  <RowDivider className="mt-10">Standard</RowDivider>
+                  <>
+                    <RowDivider className="mt-10">Standard</RowDivider>
+                    <HeaderRow />
+                  </>
                 )}
                 <MemberRow
                   member={member}
@@ -78,7 +84,10 @@ export default function App() {
           })}
 
         {!hasRenderedStandardHeader && (
-          <RowDivider className="mt-10">Standard</RowDivider>
+          <>
+            <RowDivider className="mt-10">Standard</RowDivider>
+            <HeaderRow />
+          </>
         )}
         {!hasStandard && (
           <EmptyListMessage>No standard users found</EmptyListMessage>
@@ -95,7 +104,8 @@ export default function App() {
       <Tabs tabs={["members", "groups"]} />
       <div className="flex flex-col overflow-auto rounded">
         <RadixTabs.Content value="members">
-          <ol className="border-t-2 border-slate-100">
+          <ol className="border-t-2 border-slate-200">
+            <HeaderRow />
             {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
             {members
               ? members.map((member) => (
