@@ -82,8 +82,8 @@ export default function App() {
             Groups
           </Tabs.Trigger>
         </Tabs.List>
-        <div className="border-2 border-slate-900 h-full flex flex-col items-stretch">
-          <Tabs.Content value="members" className="flex flex-col items-stretch">
+        <div className="border-2 border-slate-900 h-full flex flex-col">
+          <Tabs.Content value="members">
             {/* TODO: Figure out a fancy way to not recreate elements for each row? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
             {members?.map((member) => (
               <MemberRow
@@ -94,7 +94,7 @@ export default function App() {
             ))}
           </Tabs.Content>
           {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
-          <Tabs.Content value="groups" className="flex flex-col items-stretch">
+          <Tabs.Content value="groups">
             {renderGroupTab()}
           </Tabs.Content>
         </div>
