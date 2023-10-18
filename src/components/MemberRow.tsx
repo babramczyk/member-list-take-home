@@ -46,13 +46,14 @@ export function MemberRow({
               checked={member.admin}
               onCheckedChange={onToggleAdmin}
               id={checkboxId}
-              className="w-8 h-8 border"
+              className="w-8 h-8 border ml-2"
+              // TODO: Double check we're doing a11y right here, since we're not showing an actual label
+              aria-label="Admin"
             >
               <Checkbox.Indicator className="flex items-center justify-center">
                 <CheckIcon />
               </Checkbox.Indicator>
             </Checkbox.Root>
-            <label htmlFor={checkboxId}>Admin</label>
           </div>
         ),
       }}
