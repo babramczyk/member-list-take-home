@@ -56,6 +56,7 @@ export function MemberRow({
  * A skeleton row / loader to show while a member is loading
  */
 export function MemberRowSkeleton() {
+  // TODO: Use a better and more DRY way to share sizes and positions to mirror what a row looks like, instead of hardcoding them in both places
   return (
     <div className="border-2 border-slate-500 p-4 flex flex-col animate-pulse">
       <div className="flex flex-row items-center gap-8 pl-20">
