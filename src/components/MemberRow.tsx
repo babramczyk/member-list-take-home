@@ -10,7 +10,9 @@ export function MemberRow({ member }: { member: Member }) {
           className="w-16 h-16 rounded-full mr-4"
         />
         <div className="flex flex-col">
-          <div className="font-bold text-xl">{member.first + member.last}</div>
+          <div className="font-bold text-xl">
+            {member.first + " " + member.last}
+          </div>
           <div className="text-gray-500">{member.role}</div>
         </div>
       </div>
