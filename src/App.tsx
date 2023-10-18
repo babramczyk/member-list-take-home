@@ -31,7 +31,8 @@ export default function App() {
   }, []);
 
   // TODO: This is weird... Maybe just make a util component for a Tab?
-  const tabClassName = "border border-slate-900 rounded-t-lg p-4";
+  /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
+  const tabClassName = "border border-slate-900 rounded-t-lg p-4 Tab";
 
   return (
     <div className="h-full p-16">
