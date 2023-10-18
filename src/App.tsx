@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { Member, fetchMembers } from "./data/members";
 import "./App.css";
 import { MemberRow } from "./components/MemberRow";
@@ -34,6 +34,37 @@ export default function App() {
   /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
   const tabClassName = "border border-slate-900 rounded-t-lg p-4 Tab";
 
+  const renderGroupTab = useCallback(() => {
+    if (!members) return null;
+
+    let hasRenderedStandardHeader = false;
+
+    return (
+      <>
+        <div>Admin</div>
+        {[...members]
+          .sort((a, b) => (a.admin ? -1 : 1))
+          .map((member) => {
+            const willRenderStandardHeader =
+              !hasRenderedStandardHeader && !member.admin;
+            if (willRenderStandardHeader) {
+              hasRenderedStandardHeader = true;
+            }
+
+            return (
+              <Fragment key={member.id}>
+                {willRenderStandardHeader && <div>Standard</div>}
+                <MemberRow
+                  member={member}
+                  onToggleAdmin={() => onToggleAdmin(member.id)}
+                />
+              </Fragment>
+            );
+          })}
+      </>
+    );
+  }, [members, onToggleAdmin]);
+
   return (
     <div className="h-full p-16">
       <Tabs.Root defaultValue="members">
@@ -56,29 +87,8 @@ export default function App() {
               />
             ))}
           </Tabs.Content>
-          <Tabs.Content value="groups">
-            <div>Admin</div>
-            {members
-              // TODO: Filter in a better way / more performant way / more graceful way. i.e. maybe in a hook, maybe a util in a separate file, etc. Also, only filter once (instead of twice for each section). Maybe we could sort the array, and splice in the headers / dividers where needed
-              ?.filter((member) => member.admin)
-              .map((member) => (
-                <MemberRow
-                  key={member.id}
-                  member={member}
-                  onToggleAdmin={() => onToggleAdmin(member.id)}
-                />
-              ))}
-            <div>Standard</div>
-            {members
-              ?.filter((member) => !member.admin)
-              .map((member) => (
-                <MemberRow
-                  key={member.id}
-                  member={member}
-                  onToggleAdmin={() => onToggleAdmin(member.id)}
-                />
-              ))}
-          </Tabs.Content>
+          {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
+          <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
         </div>
       </Tabs.Root>
     </div>
