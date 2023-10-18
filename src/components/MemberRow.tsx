@@ -17,7 +17,7 @@ export function MemberRow({
   return (
     // {/* TODO: Reconsider where this goes, what the UI looks for it, etc. Current state is very barebones and kind of gross */}
     <Row
-      className={` transition-all ease-in-out duration-300 ${
+      className={` transition-all ease-in-out duration-300 bg-white ${
         applyAdminStyles && member.admin ? "ml-12" : ""
       }`}
     >

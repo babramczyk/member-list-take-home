@@ -99,7 +99,7 @@ export default function App() {
   return (
     <RadixTabs.Root
       defaultValue="members"
-      className="h-full max-w-screen-xl w-11/12 mx-auto pt-8 pb-2 overflow-hidden flex flex-col"
+      className="h-full max-w-screen-xl w-11/12 mx-auto pt-8 pb-2 overflow-hidden flex flex-col px-20"
     >
       <Tabs tabs={["members", "groups"]} />
       <div className="flex flex-col overflow-auto rounded">
