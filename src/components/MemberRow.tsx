@@ -24,6 +24,7 @@ export function MemberRow({
       {{
         column1: (
           <Avatar>
+            {/* TODO: Handle when image isn't loaded yet, i.e. show the skeleton during that time instead */}
             <img
               src={member.photo}
               alt={member.first + " " + member.last}
