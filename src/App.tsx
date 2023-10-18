@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Member, fetchMembers } from "./data/members";
+import "./App.css";
+import { MemberRow } from "./components/MemberRow";
 
 export default function App() {
   const [members, setMembers] = useState<Member[] | null>(null);
@@ -10,9 +12,12 @@ export default function App() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">The app, yo</h1>
-      {JSON.stringify(members, null, 2)}
-    </>
+    <div className="h-full p-16">
+      <div className="border-2 border-slate-900 h-full flex flex-col">
+        {members?.map((member) => (
+          <MemberRow key={member.id} member={member} />
+        ))}
+      </div>
+    </div>
   );
 }

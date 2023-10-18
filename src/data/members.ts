@@ -14,11 +14,12 @@ export function fetchMembers(): Promise<Member[]> {
 }
 
 export interface Member {
+  id: string;
   first: string;
   last: string;
   role: string;
   photo: string;
-  admin?: boolean;
+  admin: boolean;
 }
 
 // TODO: Review on if this makes sense as a generic util?
@@ -31,7 +32,7 @@ function getMembersAsArray() {
   }));
 }
 
-const _MEMBERS: Record<string, Member> = {
+const _MEMBERS: Record<string, Omit<Member, "id" | "admin">> = {
   "troy-tipton": {
     first: "Mark",
     last: "Tipton",
