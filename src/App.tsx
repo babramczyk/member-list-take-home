@@ -2,13 +2,13 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { Member, fetchMembers } from "./data/members";
 import "./App.css";
 import { MemberRow, getMemberRowSkeletonList } from "./components/MemberRow";
-import * as Tabs from "@radix-ui/react-tabs";
+import * as RadixTabs from "@radix-ui/react-tabs";
 import { RowDivider } from "./components/RowDivider";
 import { EmptyListMessage } from "./components/EmptyListMessage";
+import { Tabs } from "./components/Tabs";
 
 export default function App() {
   const [members, setMembers] = useState<Member[] | null>(null);
-
   useEffect(() => {
     // TODO: Handle error case (and include that in the mock fetch function?)
     fetchMembers().then((members) => setMembers(members));
@@ -87,26 +87,14 @@ export default function App() {
     );
   }, [members, onToggleAdmin]);
 
-  // TODO: This is weird... Maybe just make a util component for a Tab?
-  /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
-  const tabClassName =
-    "border-b-2 border-slate-300 text-slate-500 rounded-t-lg py-4 px-10 w-60 text-xl font-bold Tab";
-
   return (
-    <Tabs.Root
+    <RadixTabs.Root
       defaultValue="members"
       className="h-full max-w-screen-xl w-11/12 mx-auto pt-8 pb-2 overflow-hidden flex flex-col"
     >
-      <Tabs.List className="px-8 flex mb-4">
-        <Tabs.Trigger value="members" className={tabClassName}>
-          Members
-        </Tabs.Trigger>
-        <Tabs.Trigger value="groups" className={tabClassName}>
-          Groups
-        </Tabs.Trigger>
-      </Tabs.List>
+      <Tabs tabs={["members", "groups"]} />
       <div className="flex flex-col overflow-auto rounded">
-        <Tabs.Content value="members">
+        <RadixTabs.Content value="members">
           <ol className="border-t-2 border-slate-100">
             {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
             {members
@@ -120,10 +108,10 @@ export default function App() {
                 ))
               : getMemberRowSkeletonList(8)}
           </ol>
-        </Tabs.Content>
+        </RadixTabs.Content>
         {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
-        <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
+        <RadixTabs.Content value="groups">{renderGroupTab()}</RadixTabs.Content>
       </div>
-    </Tabs.Root>
+    </RadixTabs.Root>
   );
 }
