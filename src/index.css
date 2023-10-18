@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @tailwind */
 
 body {
   margin: 0;
@@ -19,6 +18,8 @@ code {
 
 /* TODO: Figure out a better way to do this... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
 .Tab[data-state="active"] {
-  background: black;
-  color: white;
+  /* TODO: Use a Tailwind CSS variable / don't hardcode */
+  color: #6d28d9;
+  border-color: #6d28d9;
+  border-bottom-width: 3px;
 }

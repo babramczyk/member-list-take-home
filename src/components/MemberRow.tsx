@@ -16,7 +16,7 @@ export function MemberRow({
   return (
     // TODO: In the future, we might want to let consumers specify the tag to user here. i.e. there's theoretically use cases where we're not rendering this row in a list 🤷🏼‍♂️ and in that case, we might just want a <div>
     <li
-      className={`border-2 border-slate-500 p-4 flex flex-col 
+      className={`border-b-2 border-slate-100 p-4 flex flex-col 
                   transition-all ease-in-out duration-300 
                   ${applyAdminStyles && member.admin ? "ml-12" : ""}`}
     >
@@ -63,7 +63,7 @@ export function MemberRowSkeleton({
 }) {
   // TODO: Use a better and more DRY way to share sizes and positions to mirror what a row looks like, instead of hardcoding them in both places
   return (
-    <div className="border-2 border-slate-500 p-4 flex flex-col animate-pulse">
+    <div className="border-b-2 border-slate-100 p-4 flex flex-col animate-pulse">
       <div className="flex flex-row items-center gap-8 pl-20">
         <div className={`w-16 h-16 rounded-full mr-4 ${avatarColor}`} />
         <div className="flex flex-col">

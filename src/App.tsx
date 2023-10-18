@@ -73,14 +73,14 @@ export default function App() {
 
   // TODO: This is weird... Maybe just make a util component for a Tab?
   /* TODO: Figure out a better way to do this for active tab styling (Tab class)... I like being able to style based on something I can target with a selector (i.e. `data-state` attribute), but don't know right now how that can be done gracefully with Tailwind */
-  const tabClassName = "border border-slate-900 rounded-t-lg p-4 Tab";
+  const tabClassName = "border-b-2 border-slate-300 text-slate-500 rounded-t-lg py-4 px-10 w-60 text-xl font-bold Tab";
 
   return (
     <Tabs.Root
       defaultValue="members"
       className="h-full max-w-screen-xl w-11/12 mx-auto pt-8 pb-2 overflow-hidden flex flex-col"
     >
-      <Tabs.List className="px-4 flex gap-2">
+      <Tabs.List className="px-8 flex mb-4">
         <Tabs.Trigger value="members" className={tabClassName}>
           Members
         </Tabs.Trigger>
@@ -88,7 +88,7 @@ export default function App() {
           Groups
         </Tabs.Trigger>
       </Tabs.List>
-      <div className="border-2 border-slate-900 flex flex-col overflow-auto rounded">
+      <div className="flex flex-col overflow-auto rounded border-2 border-slate-100">
         <Tabs.Content value="members">
           <ol>
             {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
