@@ -86,12 +86,13 @@ export default function App() {
       </Tabs.List>
       <div className="border-2 border-slate-900 flex flex-col overflow-auto">
         <Tabs.Content value="members">
-          {/* TODO: Figure out a fancy way to not recreate elements for each row? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
+          {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
           {members?.map((member) => (
             <MemberRow
               key={member.id}
               member={member}
               onToggleAdmin={() => onToggleAdmin(member.id)}
+              applyAdminStyles
             />
           ))}
         </Tabs.Content>
