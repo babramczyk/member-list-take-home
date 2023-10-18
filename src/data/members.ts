@@ -5,8 +5,9 @@
  */
 export function fetchMembers(): Promise<Member[]> {
   return new Promise((resolve) => {
-    const delayUpperLimit = 5_000;
-    const mockDelay = Math.floor(Math.random() * delayUpperLimit);
+    const delayFloor = 2_000;
+    const delayVariance = 1_000;
+    const mockDelay = Math.floor(Math.random() * delayVariance + delayFloor);
     setTimeout(() => {
       resolve(getMembersAsArray());
     }, mockDelay);
