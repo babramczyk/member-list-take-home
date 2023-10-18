@@ -100,8 +100,8 @@ export function MemberRowSkeleton({
 }) {
   // TODO: Use a better and more DRY way to share sizes and positions to mirror what a row looks like, instead of hardcoding them in both places
   return (
-    <Row className="animate-pulse">
-      <div className="flex flex-row items-center gap-8 pl-20">
+    <Row>
+      <div className="flex flex-row items-center gap-8 pl-20 animate-pulse">
         <Avatar className={avatarColor} />
         <div className="flex flex-col">
           <div className="font-bold text-xl bg-slate-500 h-8 w-48 mb-2" />
