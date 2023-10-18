@@ -74,7 +74,7 @@ export default function App() {
   return (
     <Tabs.Root
       defaultValue="members"
-      className="h-full px-16 pt-8 pb-2 overflow-hidden flex flex-col"
+      className="h-full max-w-screen-xl w-11/12 mx-auto pt-8 pb-2 overflow-hidden flex flex-col"
     >
       <Tabs.List className="px-4 flex gap-2">
         <Tabs.Trigger value="members" className={tabClassName}>
@@ -84,7 +84,7 @@ export default function App() {
           Groups
         </Tabs.Trigger>
       </Tabs.List>
-      <div className="border-2 border-slate-900 flex flex-col overflow-auto">
+      <div className="border-2 border-slate-900 flex flex-col overflow-auto rounded">
         <Tabs.Content value="members">
           {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
           {members?.map((member) => (
