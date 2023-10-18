@@ -1,0 +1,77 @@
+/**
+ * Get the members of the team.
+ *
+ * NOTE: While the data is technically hardcoded in source, this function mocks a fetch, by returning a promise that resolves with member data after an artificial random delay.
+ */
+export function fetchMembers(): Promise<Member[]> {
+  return new Promise((resolve) => {
+    const oneSecond = 1_000;
+    const mockDelay = Math.floor(Math.random() * oneSecond);
+    setTimeout(() => {
+      resolve(getMembersAsArray());
+    }, mockDelay);
+  });
+}
+
+export interface Member {
+  first: string;
+  last: string;
+  role: string;
+  photo: string;
+}
+
+// TODO: Review on if this makes sense as a generic util?
+function getMembersAsArray() {
+  return Object.keys(_MEMBERS).map((id) => ({ id, ..._MEMBERS[id] }));
+}
+
+const _MEMBERS: Record<string, Member> = {
+  "troy-tipton": {
+    first: "Mark",
+    last: "Tipton",
+    role: "Design",
+    photo: "https://i.pravatar.cc/400?img=51",
+  },
+  "jennifer-todd": {
+    first: "Jennifer",
+    last: "Todd",
+    role: "Engineering",
+    photo: "https://i.pravatar.cc/400?img=45",
+  },
+  "terry-graf": {
+    first: "Terry",
+    last: "Graf",
+    role: "Engineering",
+    photo: "https://i.pravatar.cc/400?img=7",
+  },
+  "rebecca-morse": {
+    first: "Rebecca",
+    last: "Morse",
+    role: "CTO",
+    photo: "https://i.pravatar.cc/400?img=49",
+  },
+  "aaron-bowman": {
+    first: "Aaron",
+    last: "Bowman",
+    role: "Engineering",
+    photo: "https://i.pravatar.cc/400?img=69",
+  },
+  "julius-rivera": {
+    first: "Julius",
+    last: "Rivera",
+    role: "Engineering",
+    photo: "https://i.pravatar.cc/400?img=68",
+  },
+  "stephanie-nelson": {
+    first: "Stephanie",
+    last: "Nelson",
+    role: "Engineering",
+    photo: "https://i.pravatar.cc/400?img=16",
+  },
+  "michelle-samuel": {
+    first: "Michelle",
+    last: "Samuel",
+    role: "Developer Experience",
+    photo: "https://i.pravatar.cc/400?img=35",
+  },
+};
