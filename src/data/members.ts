@@ -19,6 +19,7 @@ export interface Member {
   last: string;
   role: string;
   photo: string;
+  // TODO: Rename to `isAdmin`
   admin: boolean;
 }
 
