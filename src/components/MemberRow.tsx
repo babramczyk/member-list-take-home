@@ -38,7 +38,7 @@ export function MemberRow({
 
         <img
           src={member.photo}
-          alt={member.first}
+          alt={member.first + " " + member.last}
           className="w-16 h-16 rounded-full mr-4"
         />
         <div className="flex flex-col">
