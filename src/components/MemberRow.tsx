@@ -51,7 +51,7 @@ export function MemberRow({
               aria-label="Admin"
             >
               <Checkbox.Indicator className="flex items-center justify-center">
-                <CheckIcon className="w-8 h-6" />
+                <CheckIcon className="w-8 h-6 text-slate-600" />
               </Checkbox.Indicator>
             </Checkbox.Root>
           </div>
