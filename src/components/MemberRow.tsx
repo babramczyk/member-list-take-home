@@ -12,6 +12,7 @@ export function MemberRow({
   /** Apply special styles if this user is an admin (i.e. indenting the row) */
   applyAdminStyles?: boolean;
 }) {
+  const checkboxId = `${member.id}__admin-checkbox`;
   return (
     <div
       className={`border-2 border-slate-500 p-4 flex flex-col 
@@ -24,14 +25,14 @@ export function MemberRow({
           <Checkbox.Root
             checked={member.admin}
             onCheckedChange={onToggleAdmin}
-            id={`${member.id}__admin-checkbox`}
+            id={checkboxId}
             className="w-8 h-8 border"
           >
             <Checkbox.Indicator className="flex items-center justify-center">
               <CheckIcon />
             </Checkbox.Indicator>
           </Checkbox.Root>
-          <label htmlFor={`${member.id}__admin-checkbox`}>Admin</label>
+          <label htmlFor={checkboxId}>Admin</label>
         </div>
 
         <img
