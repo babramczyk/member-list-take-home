@@ -14,7 +14,8 @@ export function MemberRow({
 }) {
   const checkboxId = `${member.id}__admin-checkbox`;
   return (
-    <div
+    // TODO: In the future, we might want to let consumers specify the tag to user here. i.e. there's theoretically use cases where we're not rendering this row in a list 🤷🏼‍♂️ and in that case, we might just want a <div>
+    <li
       className={`border-2 border-slate-500 p-4 flex flex-col 
                   transition-all ease-in-out duration-300 
                   ${applyAdminStyles && member.admin ? "ml-12" : ""}`}
@@ -47,7 +48,7 @@ export function MemberRow({
           <div className="text-gray-500">{member.role}</div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }
 

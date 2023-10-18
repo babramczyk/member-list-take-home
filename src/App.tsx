@@ -31,8 +31,6 @@ export default function App() {
     });
   }, []);
 
-  // TODO: Make lists more semantic (i.e. ul / li)
-
   const renderGroupTab = useCallback(() => {
     if (!members)
       return (
@@ -48,7 +46,7 @@ export default function App() {
     let hasRenderedStandardHeader = false;
 
     return (
-      <>
+      <ol>
         <RowDivider>Admin</RowDivider>
         {[...members]
           .sort((a, b) => (a.admin ? -1 : 1))
@@ -69,7 +67,7 @@ export default function App() {
               </Fragment>
             );
           })}
-      </>
+      </ol>
     );
   }, [members, onToggleAdmin]);
 
@@ -92,17 +90,19 @@ export default function App() {
       </Tabs.List>
       <div className="border-2 border-slate-900 flex flex-col overflow-auto rounded">
         <Tabs.Content value="members">
-          {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
-          {members
-            ? members.map((member) => (
-                <MemberRow
-                  key={member.id}
-                  member={member}
-                  onToggleAdmin={() => onToggleAdmin(member.id)}
-                  applyAdminStyles
-                />
-              ))
-            : getMemberRowSkeletonList(8)}
+          <ol>
+            {/* TODO: Figure out a fancy way to not recreate elements for each row when we switch tabs? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
+            {members
+              ? members.map((member) => (
+                  <MemberRow
+                    key={member.id}
+                    member={member}
+                    onToggleAdmin={() => onToggleAdmin(member.id)}
+                    applyAdminStyles
+                  />
+                ))
+              : getMemberRowSkeletonList(8)}
+          </ol>
         </Tabs.Content>
         {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
         <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
