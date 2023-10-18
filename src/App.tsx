@@ -72,33 +72,32 @@ export default function App() {
   }, [members, onToggleAdmin]);
 
   return (
-    <div className="h-full p-16">
-      <Tabs.Root defaultValue="members">
-        <Tabs.List className="px-4 flex gap-2">
-          <Tabs.Trigger value="members" className={tabClassName}>
-            Members
-          </Tabs.Trigger>
-          <Tabs.Trigger value="groups" className={tabClassName}>
-            Groups
-          </Tabs.Trigger>
-        </Tabs.List>
-        <div className="border-2 border-slate-900 h-full flex flex-col">
-          <Tabs.Content value="members">
-            {/* TODO: Figure out a fancy way to not recreate elements for each row? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
-            {members?.map((member) => (
-              <MemberRow
-                key={member.id}
-                member={member}
-                onToggleAdmin={() => onToggleAdmin(member.id)}
-              />
-            ))}
-          </Tabs.Content>
-          {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
-          <Tabs.Content value="groups">
-            {renderGroupTab()}
-          </Tabs.Content>
-        </div>
-      </Tabs.Root>
-    </div>
+    <Tabs.Root
+      defaultValue="members"
+      className="h-full px-16 pt-8 pb-2 overflow-hidden flex flex-col"
+    >
+      <Tabs.List className="px-4 flex gap-2">
+        <Tabs.Trigger value="members" className={tabClassName}>
+          Members
+        </Tabs.Trigger>
+        <Tabs.Trigger value="groups" className={tabClassName}>
+          Groups
+        </Tabs.Trigger>
+      </Tabs.List>
+      <div className="border-2 border-slate-900 flex flex-col overflow-auto">
+        <Tabs.Content value="members">
+          {/* TODO: Figure out a fancy way to not recreate elements for each row? Would be better for perf if we need that one day, + could do some fun animation stuff as rows move around */}
+          {members?.map((member) => (
+            <MemberRow
+              key={member.id}
+              member={member}
+              onToggleAdmin={() => onToggleAdmin(member.id)}
+            />
+          ))}
+        </Tabs.Content>
+        {/* TODO: Don't do this sorting / logic if this tab isn't active / rendered? */}
+        <Tabs.Content value="groups">{renderGroupTab()}</Tabs.Content>
+      </div>
+    </Tabs.Root>
   );
 }
