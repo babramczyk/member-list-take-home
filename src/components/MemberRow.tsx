@@ -57,11 +57,11 @@ export function MemberRow({
 export function MemberRowSkeleton() {
   return (
     <div className="border-2 border-slate-500 p-4 flex flex-col animate-pulse">
-      <div className="flex flex-row items-center gap-8">
-        <div className="w-8 h-8 rounded-full mr-4 bg-gray-300" />
+      <div className="flex flex-row items-center gap-8 pl-20">
+        <div className="w-16 h-16 rounded-full mr-4 bg-gray-400" />
         <div className="flex flex-col">
-          <div className="font-bold text-xl bg-gray-300 h-8 w-48" />
-          <div className="text-gray-500 bg-gray-300 h-4 w-32" />
+          <div className="font-bold text-xl bg-gray-500 h-8 w-48 mb-2" />
+          <div className="bg-gray-300 h-4 w-32" />
         </div>
       </div>
     </div>
