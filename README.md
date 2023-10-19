@@ -5,13 +5,19 @@
 - All `TODO`s remaining in source 😄
 - Use a `<table>` for better HTML semantics, and possibly some a11y benefits
   - Opted to not use one, since I know they can be tricky WRT styling, flexbox, etc. In a production app where we had the time, we could maybe invest the time to make a `<table>` work, but I didn't want to eff with that for now
-- Add a loading state in case members take longer to load (i.e. React suspense / showing a spinner after e.g 500ms, or adding a loading skeleton)
 - Have more intuitive list ordering. i.e. right now on the Groups tab, if you make a user an admin, they just splice in anywhere on the admin list. It would probably be more user friendly to put them at the bottom, so it's more predictable, and closer to where the row was originally (less visual context switching)
+- Style the active row, i.e. `focus-within`
+- Allow multi selecting rows, i.e. with cmd+click or shift+click, or with a keyboard shortcut
+- Add keyboard shortcuts
+  - `j`: move down in likst
+  - `k`: move up in list
+  - `x`: mark current list item as selected
+  - `a`: toggle current list item or selected list items as admins
+  - `>`: move to the next / right tab
+  - `<`: move to the previous / left tab
+  - (in the future): `enter`: open detail view for current list item
+- Add more colors? It's clean the way it is right now, but doesn't have much uniqueness / personality
 - Better define defaults for Tailwind. i.e. theming, default border colors so we don't have to specify `slate` everywhere, etc.
 - Persist admin state (i.e. with a backend, local storage, etc.)
-
-# To-do
-
-- Style the active row, i.e. `focus-within`
 - Don't assume we have every field always on a member (i.e. we might not have an avatar, even though the current data gives us that always)
 - Fix scroll resetting to top when you add an admin and the admin list is of a certain size. If the moved list item was out of view, it should scroll only to the point where it's now in view, and no further
