@@ -77,12 +77,12 @@ export function MemberRowSkeleton({
   avatarColor?: string;
 }) {
   return (
-    <Row>
+    <Row className="bg-white ">
       {{
         column1: <Avatar className={avatarColor} />,
         column2: (
           <div className="flex flex-col">
-            <div className="font-bold text-xl bg-slate-500 h-8 w-48 mb-2" />
+            <div className="font-bold text-xl bg-slate-500 h-7 w-48 mb-2" />
             <div className="bg-slate-300 h-4 w-32" />
           </div>
         ),
