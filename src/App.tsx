@@ -22,17 +22,17 @@ export default function App() {
       // TODO: Overall, review how we're storing admin data. For now, we're storing it on each member object. We could do something else, like store a mapping or array of which members are admins. But, that kind of couples us to the current use case, where admin tracking is completely and only tracked client side -- i.e. what if in the future, the API returns `.admin` as a field on each member? Hard to determine a path without knowing requirements, but this works for now
       // TODO: If we stick with this approach, we could probably make this update a bit more performant if we needed to, i.e. by storing members as an object, only updating the member that changed, short circuiting after finding them, etc.
       return prevMembers?.map((prevMember) => {
-        if (prevMember.id === memberId) {
-          return {
-            ...prevMember,
-            admin: !prevMember.admin,
-          };
-        }
-        return prevMember;
+        if (prevMember.id !== memberId) return prevMember;
+
+        return {
+          ...prevMember,
+          admin: !prevMember.admin,
+        };
       });
     });
   }, []);
 
+  // TODO: Consider moving this to a separate file / hook. This file isn't super huge for right now so it's not a big deal, and is kind of nice to keep everything co-located. But it's also kind of messy
   const renderGroupTab = useCallback(() => {
     if (!members)
       return (

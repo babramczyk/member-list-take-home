@@ -3,45 +3,48 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { Row } from "./Row";
 
+/**
+ * A row in the members list
+ */
 export function MemberRow({
   member,
   onToggleAdmin,
   applyAdminStyles,
 }: {
+  /** The full member object to render */
   member: Member;
+  /** Called when the user initiated an action to toggle whether the user is an admin or not */
   onToggleAdmin?: () => void;
   /** Apply special styles if this user is an admin (i.e. indenting the row) */
   applyAdminStyles?: boolean;
 }) {
   const checkboxId = `${member.id}__admin-checkbox`;
   return (
-    // {/* TODO: Reconsider where this goes, what the UI looks for it, etc. Current state is very barebones and kind of gross */}
     <Row
       className={` transition-all ease-in-out duration-300 bg-white ${
         // NOTE: Using `translate` here for a smoother transition with the GPU. But since we're using that instead of margin, we have a slight hack to shrink the width, so that the right edge doesn't move. We could improve upon this in the future
-        applyAdminStyles && member.admin ? "translate-x-12 w-[calc(100%-3rem)]" : ""
+        applyAdminStyles && member.admin
+          ? "translate-x-12 w-[calc(100%-3rem)]"
+          : ""
       }`}
     >
       {{
         column1: (
           <Avatar>
             {/* TODO: Handle when image isn't loaded yet, i.e. show the skeleton during that time instead */}
-            <img
-              src={member.photo}
-              alt={member.first + " " + member.last}
-              className="rounded-full"
-            />
+            {/* NOTE: We're using an empty `alt` here, since this element is purely decorative */}
+            <img src={member.photo} alt="" className="rounded-full" />
           </Avatar>
         ),
         column2: (
           <div className="flex flex-col">
-            <div className="font-semibold text-slate-800 text-lg">
+            <div className="font-semibold text-slate-700 text-lg">
               {member.first + " " + member.last}
             </div>
             <div className="text-slate-500">{member.role}</div>
           </div>
         ),
-        column3: (
+        columnLast: (
           <div className="flex flex-col items-center gap-2">
             <Checkbox.Root
               checked={member.admin}
@@ -63,22 +66,6 @@ export function MemberRow({
 }
 
 /********************************************************************
- * Shared Utils
- *******************************************************************/
-
-function Avatar({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={`w-12 h-12 rounded-full ${className}`}>{children}</div>
-  );
-}
-
-/********************************************************************
  * Skeleton
  *******************************************************************/
 
@@ -91,7 +78,6 @@ export function MemberRowSkeleton({
   /** Background color to make the loader for the user's avatar, as a Tailwind string (e.g. `bg-red-950`) */
   avatarColor?: string;
 }) {
-  // TODO: Use a better and more DRY way to share sizes and positions to mirror what a row looks like, instead of hardcoding them in both places
   return (
     <Row>
       {{
@@ -107,6 +93,9 @@ export function MemberRowSkeleton({
   );
 }
 
+/**
+ * Generates a list of skeleton rows to show while members are loading
+ */
 export function getMemberRowSkeletonList(size: number) {
   const colorList = [
     "bg-red-950",
@@ -127,4 +116,23 @@ export function getMemberRowSkeletonList(size: number) {
         avatarColor={colorList[Math.floor(Math.random() * colorList.length)]}
       />
     ));
+}
+
+/********************************************************************
+ * Shared Utils
+ *
+ * These are shared between the MemberRow and MemberRowSkeleton
+ * components, so we can ensure they line up and are sized the same
+ *******************************************************************/
+
+function Avatar({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`w-12 h-12 rounded-full ${className}`}>{children}</div>
+  );
 }
