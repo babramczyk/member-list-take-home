@@ -18,7 +18,8 @@ export function MemberRow({
     // {/* TODO: Reconsider where this goes, what the UI looks for it, etc. Current state is very barebones and kind of gross */}
     <Row
       className={` transition-all ease-in-out duration-300 bg-white ${
-        applyAdminStyles && member.admin ? "ml-12" : ""
+        // NOTE: Using `translate` here for a smoother transition with the GPU. But since we're using that instead of margin, we have a slight hack to shrink the width, so that the right edge doesn't move. We could improve upon this in the future
+        applyAdminStyles && member.admin ? "translate-x-12 w-[calc(100%-3rem)]" : ""
       }`}
     >
       {{
