@@ -21,3 +21,4 @@
 - Persist admin state (i.e. with a backend, local storage, etc.)
 - Don't assume we have every field always on a member (i.e. we might not have an avatar, even though the current data gives us that always)
 - Fix scroll resetting to top when you add an admin and the admin list is of a certain size. If the moved list item was out of view, it should scroll only to the point where it's now in view, and no further
+- Lots more code review and refactoring 🙂
